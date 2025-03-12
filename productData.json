@@ -1,0 +1,44 @@
+{
+    "duck": {
+        "needed_yarn_grams": 9,
+        "needed_time_minutes": 60,
+        "needed_eyes": 2,
+        "difficulty_rate_percent": 10,
+        "product_name": "duck"
+    },
+    "cat": {
+        "needed_yarn_grams": 50,
+        "needed_time_minutes": 120,
+        "needed_eyes": 2,
+        "difficulty_rate_percent": 45,
+        "product_name": "cat"
+    },
+    "bee": {
+        "needed_yarn_grams": 10,
+        "needed_time_minutes": 60,
+        "needed_eyes": 2,
+        "difficulty_rate_percent": 18,
+        "product_name": "bee"
+    },
+    "triceratops": {
+        "needed_yarn_grams": 45,
+        "needed_time_minutes": 60,
+        "needed_eyes": 2,
+        "difficulty_rate_percent": 25,
+        "product_name": "triceratops"
+    },
+    "flower duck": {
+        "needed_yarn_grams": 30,
+        "needed_time_minutes": 60,
+        "needed_eyes": 2,
+        "difficulty_rate_percent": 30,
+        "product_name": "flower duck"
+    },
+    "chubby baby bat": {
+        "needed_yarn_grams": 30,
+        "needed_time_minutes": 120,
+        "needed_eyes": 2,
+        "difficulty_rate_percent": 55,
+        "product_name": "chubby baby bat"
+    }
+}

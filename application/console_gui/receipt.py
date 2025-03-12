@@ -1,0 +1,37 @@
+from models import *
+from application.helpers import *
+
+def display_receipt(product: Product, amount: int, total_price: float, base_price: float):
+    clean_console()
+    print("\n" + "=" * 50)
+    print("")
+    print(f"          🧾 RECEIPT FOR: {product.product_name.upper()} 🧾")
+    print("")
+    print("=" * 50)
+    print("")
+    print("")
+    print(f"🧶 +  Needed Yarn (grams):      {product.needed_yarn_grams * amount}g")
+    print(f"👀 +  Needed Eyes:              {product.needed_eyes * amount}")
+    print(f"⏳ +  Approx. Time Needed:      {product.needed_time_minutes * amount} minutes")
+    print(f"🎯 +  Difficulty Level:         {product.difficulty_rate_percent} %")
+    print("")
+    print(f" * Amount:         {amount}")
+    print("")
+    print("\n" + "-" * 50)
+    print("")
+    print(f"💰  Base Price (Materials):   {base_price:.2f} dkk")
+    print(f"💵  Total Price:              {total_price:.2f} dkk")
+    print("")
+    print("=" * 50 + "\n")
+
+def display_new_product_receipt(product_name, needed_yarn, needed_eyes, needed_time, difficulty) :
+    clean_console()
+    print("\n" + "=" * 60)
+    print(" " * 20 + "🧾 Product created 🧾")
+    print("=" * 60)
+    print(f"🧸 Product Name:      {product_name}")
+    print(f"🧶 Needed Yarn:       {needed_yarn} grams")
+    print(f"👀 Needed Eyes:       {needed_eyes} pieces")
+    print(f"⏳ Time Estimate:     {needed_time} minutes")
+    print(f"⚠️ Difficulty Level:  {difficulty}%")
+    print("=" * 60)
