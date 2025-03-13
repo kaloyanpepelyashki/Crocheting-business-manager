@@ -1,20 +1,8 @@
 import json
 from typing import List
+from application.helpers import interpolate_product_string
 
-with open("productData.json", "r") as file:
-    data = json.load(file)
-    product_data = json.loads(json.dumps(data))
-
-def interpolate_product_types():
-    string: str = "\n "
-
-    for key, product in product_data.items():
-        temp_string: str = f"[ {product["product_name"]} ]    |     "
-        string = " ".join([string, temp_string])
-
-    return string
-
-product_names_string = interpolate_product_types()
+product_names_string = interpolate_product_string()
 
 def display_banner():
     print("+" * 50)

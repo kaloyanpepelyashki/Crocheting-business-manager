@@ -6,7 +6,11 @@ def main() :
         initial_action_choice = initial_action()
 
         if initial_action_choice == 1:
-            create_product_action()
+            collection_action = choose_collection_action()
+            if collection_action == 1:
+                create_product_action()
+            else : 
+                delete_product_action()
         elif initial_action_choice == 2:
             select_product_action()
 

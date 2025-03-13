@@ -42,6 +42,17 @@ def select_product_action():
     input("🔵 Press Enter to continue...")
     return
 
+def choose_collection_action() :
+    clean_console()
+    display_collection_action_banner()
+
+    while True:
+        collection_action = int(input_validator("Choose an action > "))
+        if collection_action == 1 or collection_action == 2 or collection_action == 3:
+            return collection_action
+        else:
+            print("Please select a valid option 1 - 3")
+    
 def create_product_action() :
     clean_console()
     display_create_product_banner()
@@ -54,3 +65,25 @@ def create_product_action() :
     append_to_json(product_name, {"needed_yarn_grams": needed_yarn_grams, "needed_time_minutes": needed_time_minutes, "needed_eyes": needed_eyes, "difficulty_rate_percent": difficulty_rate_percent, "product_name": product_name })
     display_new_product_receipt(product_name, needed_yarn_grams, needed_eyes, needed_time_minutes, difficulty_rate_percent)
     input("🔵 Press Enter to continue...")
+
+def delete_product_action() :
+    clean_console()
+    display_delete_product_banner()
+
+    while True:
+        product_to_delete = input_validator("Type in the product name > ")
+
+        if len(product_to_delete) > 0:
+            clean_console()
+            display_deletion_confirmation()
+            deletion_confirmation = input_validator("Choose an action > ")
+
+            if deletion_confirmation == "yes" or deletion_confirmation == "y":
+                delete_from_json(product_to_delete)
+                input("🔵 Press Enter to continue...")
+                return
+            else: 
+                return
+        else :
+            print("❌ Type a valid product name")
+
