@@ -4,8 +4,10 @@ from application.console_gui import *
 from models import *
 from application.helpers import *
 from .create_product_input_receiver import *
-from infrastructure.file_system import *
 from infrastructure.cli import *
+from application.operations import * 
+
+PRODUCT_DATA_FILE_PATH = "productData.json"
 
 def initial_action():
     clean_console()
@@ -24,10 +26,7 @@ def initial_action():
 
 def select_product_action():
     clean_console()
-    with open("productData.json", "r") as file:
-        data = json.load(file)
-        product_data = json.loads(json.dumps(data))
-
+    product_data = handle_read_operation(PRODUCT_DATA_FILE_PATH)
 
     display_banner()
     product_type_selected = input_validator("Product type > ")
@@ -62,7 +61,8 @@ def create_product_action() :
     needed_time_minutes = get_time_needed()
     difficulty_rate_percent = get_difficulty_level()
 
-    append_to_json(product_name, {"needed_yarn_grams": needed_yarn_grams, "needed_time_minutes": needed_time_minutes, "needed_eyes": needed_eyes, "difficulty_rate_percent": difficulty_rate_percent, "product_name": product_name })
+    handle_write_operation(PRODUCT_DATA_FILE_PATH, product_name, {"needed_yarn_grams": needed_yarn_grams, "needed_time_minutes": needed_time_minutes, "needed_eyes": needed_eyes, "difficulty_rate_percent": difficulty_rate_percent, "product_name": product_name })
+    #//TODO The values of the new product should be returned from the file where it was written, this way we validate the product was actually written
     display_new_product_receipt(product_name, needed_yarn_grams, needed_eyes, needed_time_minutes, difficulty_rate_percent)
     input("🔵 Press Enter to continue...")
 

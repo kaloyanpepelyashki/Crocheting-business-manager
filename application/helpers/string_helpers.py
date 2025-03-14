@@ -1,7 +1,7 @@
-from infrastructure.file_system import read_from_json
+from application.operations import handle_read_operation
 
 def interpolate_product_string():
-    product_data = read_from_json("productData.json")
+    product_data = handle_read_operation("productData.json")
     string: str = "\n "
 
     for key, product in product_data.items():

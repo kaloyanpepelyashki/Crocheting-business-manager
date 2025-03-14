@@ -1,11 +1,9 @@
-import json
+from infrastructure.file_system import read_from_json, write_to_json
 
-def delete_from_json(key_to_delete) :
-     FILE_PATH = "productData.json"
+def handle_delete_operation(file_path, key_to_delete) :
      try:
-        with open(FILE_PATH, "r") as file:
-            data = json.load(file)
-        
+        data = read_from_json(file_path)
+
         if isinstance(data, dict) :
             if key_to_delete in data:
                 del data[key_to_delete]
@@ -15,8 +13,7 @@ def delete_from_json(key_to_delete) :
         else :
             raise ValueError("⚠️ Error deleting product")
         
-        with open(FILE_PATH, "w") as file:
-            json.dump(data, file, indent=4)
+        write_to_json(file_path, data)
     
      except (json.JSONDecodeError, FileNotFoundError):
         print("⚠️ Problem saving product")
