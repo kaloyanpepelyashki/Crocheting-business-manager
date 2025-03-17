@@ -98,6 +98,7 @@ def delete_product_action() :
 
 def update_product_action() :
     clean_console()
+    display_update_product_banner()
 
     product_to_update = input_validator("Choose product to update > ")
     attribute_to_update = input_validator("Choose attribute to update > ")
