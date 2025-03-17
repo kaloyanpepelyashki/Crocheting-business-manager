@@ -95,3 +95,12 @@ def delete_product_action() :
             print("⏪ Deletion canceled.")
             return
 
+
+def update_product_action() :
+    clean_console()
+
+    product_to_update = input_validator("Choose product to update > ")
+    attribute_to_update = input_validator("Choose attribute to update > ")
+    new_value = input_validator(f"New value of {attribute_to_update} > ")
+
+    handle_update_product_operation(PRODUCT_DATA_FILE_PATH, product_to_update, attribute_to_update, new_value)
