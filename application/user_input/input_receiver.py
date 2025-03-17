@@ -1,5 +1,3 @@
-import math
-import json
 from application.console_gui import *
 from models import *
 from application.helpers import *
@@ -61,29 +59,39 @@ def create_product_action() :
     needed_time_minutes = get_time_needed()
     difficulty_rate_percent = get_difficulty_level()
 
-    handle_write_operation(PRODUCT_DATA_FILE_PATH, product_name, {"needed_yarn_grams": needed_yarn_grams, "needed_time_minutes": needed_time_minutes, "needed_eyes": needed_eyes, "difficulty_rate_percent": difficulty_rate_percent, "product_name": product_name })
-    #//TODO The values of the new product should be returned from the file where it was written, this way we validate the product was actually written
-    display_new_product_receipt(product_name, needed_yarn_grams, needed_eyes, needed_time_minutes, difficulty_rate_percent)
-    input("🔵 Press Enter to continue...")
+    product_creation_success = handle_write_new_product_operation(PRODUCT_DATA_FILE_PATH, product_name, {"needed_yarn_grams": needed_yarn_grams, "needed_time_minutes": needed_time_minutes, "needed_eyes": needed_eyes, "difficulty_rate_percent": difficulty_rate_percent, "product_name": product_name })
+    if product_creation_success :
+        display_new_product_receipt(product_name, needed_yarn_grams, needed_eyes, needed_time_minutes, difficulty_rate_percent)
+        input("🔵 Press Enter to continue...")
+    else :
+        print("Product was not created")
+        input("🔵 Press Enter to continue...")
 
 def delete_product_action() :
     clean_console()
     display_delete_product_banner()
 
     while True:
-        product_to_delete = input_validator("Type in the product name > ")
+        product_to_delete = input_validator("Type in the product name > ").strip()
 
-        if len(product_to_delete) > 0:
-            clean_console()
-            display_deletion_confirmation()
-            deletion_confirmation = input_validator("Choose an action > ")
+        if not product_to_delete:
+            print("❌ Type a valid product name")
+            continue
 
-            if deletion_confirmation == "yes" or deletion_confirmation == "y":
-                delete_from_json(product_to_delete)
+        clean_console()
+        display_deletion_confirmation()
+        deletion_confirmation = input_validator("Choose an action > ")
+
+        if deletion_confirmation == "yes" or deletion_confirmation == "y":
+            delete_operation_success = handle_delete_product_operation(PRODUCT_DATA_FILE_PATH, product_to_delete)
+            if delete_operation_success :
                 input("🔵 Press Enter to continue...")
                 return
-            else: 
+            else :
+                print("Product was not deleted")
+                input("🔵 Press Enter to continue...")
                 return
-        else :
-            print("❌ Type a valid product name")
+        if deletion_confirmation == "no" or deletion_confirmation == "n" or deletion_confirmation == "":
+            print("⏪ Deletion canceled.")
+            return
 
