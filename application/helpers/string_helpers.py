@@ -9,3 +9,12 @@ def interpolate_product_string() :
         string = " ".join([string, temp_string])
 
     return string
+
+def interpolate_attributes_to_string(attributes_array): 
+    string = ""
+
+    for i in range(0, len(attributes_array)):
+        temp_string = f"[ {i + 1} ]. {attributes_array[i]}"
+        string = " ".join([string, temp_string])
+    
+    return string

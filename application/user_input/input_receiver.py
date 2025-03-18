@@ -100,7 +100,20 @@ def update_product_action() :
     clean_console()
     display_update_product_banner()
 
-    product_to_update = input_validator("Choose product to update > ")
+    product_name = ""
+    while True:
+        product_to_update = input_validator("Choose product to update > ")
+
+        if not product_to_update :
+            print("❌ Provide a product name!")
+            continue 
+
+        product_name = product_to_update
+        break
+
+
+    clean_console()
+    display_update_attribute_banner(product_name)
     attribute_to_update = input_validator("Choose attribute to update > ")
     new_value = input_validator(f"New value of {attribute_to_update} > ")
 

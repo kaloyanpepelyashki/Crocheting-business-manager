@@ -1,4 +1,4 @@
-from application.helpers import interpolate_product_string
+from application.helpers import interpolate_product_string, get_product_attributes, interpolate_attributes_to_string
 
 def display_initial_action_banner(): 
     print("\n" + "=" * 60)
@@ -52,7 +52,7 @@ def display_deletion_confirmation():
     print("❌  Type [ no ] or [ n ] to cancel.")
     print("=" * 30 + "\n")
 
-def display_update_product_banner() :
+def display_update_product_banner():
     product_names_string = interpolate_product_string()
     print("\n" + "=" * 50)
     print("📦   UPDATE PRODUCT DETAILS   ✏️")
@@ -65,5 +65,20 @@ def display_update_product_banner() :
     print(product_names_string)
     print("")
     print("🔹 Follow the prompts to make changes.")
+    print("")
+    print("=" * 50 + "\n")
+
+def display_update_attribute_banner(product_name):
+    product_attributes = get_product_attributes(product_name)
+    print("\n" + "=" * 50)
+    print("🎯   SELECT ATTRIBUTE TO UPDATE   🔧")
+    print("=" * 50)
+    print("")
+    print("🔄 Choose which product attribute you want to modify:")
+    print("")
+    print(product_attributes)
+    print("")
+    print("🔹 Type the corresponding number to update an attribute.")
+    print("🔹 Type 'exit' to cancel the update.")
     print("")
     print("=" * 50 + "\n")
