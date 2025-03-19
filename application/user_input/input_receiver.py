@@ -3,7 +3,8 @@ from models import *
 from application.helpers import *
 from .create_product_input_receiver import *
 from infrastructure.cli import *
-from application.operations import * 
+from application.operations import *
+from .update_product_input_receiver import *
 
 PRODUCT_DATA_FILE_PATH = "productData.json"
 
@@ -100,21 +101,39 @@ def update_product_action() :
     clean_console()
     display_update_product_banner()
 
-    product_name = ""
-    while True:
-        product_to_update = input_validator("Choose product to update > ")
+    product_to_update = get_valid_product_name_input()
+   
+    # while True:
+    #     product_to_update = input_validator("Choose product to update > ")
 
-        if not product_to_update :
-            print("❌ Provide a product name!")
-            continue 
+    #     if not product_to_update :
+    #         print("❌ Provide a product name!")
+    #         continue 
 
-        product_name = product_to_update
-        break
+    #     product_name = product_to_update
+    #     break
 
 
     clean_console()
-    display_update_attribute_banner(product_name)
-    attribute_to_update = input_validator("Choose attribute to update > ")
-    new_value = input_validator(f"New value of {attribute_to_update} > ")
+    display_update_attribute_banner(product_to_update)
+    attribute_to_update = get_valid_attribute_name_input()
+    attribute_full_value = resolve_index_to_attribute(product_to_update, attribute_to_update)
 
-    handle_update_product_operation(PRODUCT_DATA_FILE_PATH, product_to_update, attribute_to_update, new_value)
+    # while True:
+    #     attribute_to_update = input_validator("Choose attribute to update > ")
+
+    #     if not attribute_to_update :
+    #        print("❌ Provide an attribute to update!")
+        
+    #     if not attribute_to_update.isnumeric() or not int(attribute_to_update) > 1 and int(attribute_to_update) < 5:
+    #         print("❌ The selected value must be valid [1 - 5]")
+
+    #     break
+
+    product_data = handle_read_operation(PRODUCT_DATA_FILE_PATH)
+    old_attribute_value = product_data[product_to_update][attribute_full_value]
+    
+    #new_value = input_validator(f"New value of {attribute_to_update} > ")
+    new_value = get_valid_new_value_input(f"New value > ", old_attribute_value )
+
+    handle_update_product_operation(PRODUCT_DATA_FILE_PATH, product_to_update, attribute_full_value, new_value)

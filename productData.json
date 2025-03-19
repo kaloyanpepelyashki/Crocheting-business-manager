@@ -42,8 +42,8 @@
         "product_name": "chubby baby bat"
     },
     "nov product": {
-        "needed_yarn_grams": "34",
-        "needed_time_minutes": 30,
+        "needed_yarn_grams": 34,
+        "needed_time_minutes": 54,
         "needed_eyes": 2,
         "difficulty_rate_percent": 20,
         "product_name": "nov product"

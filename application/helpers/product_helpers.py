@@ -11,6 +11,7 @@ def interpolate_product_string():
 
     return string
 
+
 def extract_product_attributes(product):
     attributes_array = []
 
@@ -19,9 +20,28 @@ def extract_product_attributes(product):
     
     return attributes_array
 
+
 def get_product_attributes(product_name):
-    product_data = handle_read_operation("productData.json")
-    product_attribute_array = extract_product_attributes(product_data[product_name])
-    interpolated_attributes = interpolate_attributes_to_string(product_attribute_array)
+    product_attribute_dictionary = define_product_attributes_dictionary(product_name)
+    interpolated_attributes = interpolate_attributes_to_string(product_attribute_dictionary)
 
     return interpolated_attributes
+
+
+def define_product_attributes_dictionary(product_name) -> dict:
+    product_data = handle_read_operation("productData.json")
+    product_attribute_array = extract_product_attributes(product_data[product_name])
+
+    dictionary = {}
+
+    for i in range(0, len(product_attribute_array)):
+        dictionary[i+1] = product_attribute_array[i]
+    
+    return dictionary
+
+
+def resolve_index_to_attribute(product_name: str, selected_index: int):
+    product_attribute_dictionary = define_product_attributes_dictionary(product_name)
+    value = product_attribute_dictionary[selected_index]
+
+    return value

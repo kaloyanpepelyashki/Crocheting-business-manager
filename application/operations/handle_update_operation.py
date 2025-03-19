@@ -21,7 +21,7 @@ def handle_update_product_operation(file_path, product_key, attribure_to_update,
             return False
     
 
-        product_data[product_key][attribure_to_update] = new_value 
+        product_data[product_key][attribure_to_update] = new_value
 
         write_to_json(file_path, product_data)
     except (json.JSONDecodeError, FileNotFoundError):

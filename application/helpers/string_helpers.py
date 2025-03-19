@@ -10,11 +10,14 @@ def interpolate_product_string() :
 
     return string
 
-def interpolate_attributes_to_string(attributes_array): 
-    string = ""
+def normalize_attribute_string(s):
+    return ' '.join(word.capitalize() for word in s.split('_'))
 
-    for i in range(0, len(attributes_array)):
-        temp_string = f"[ {i + 1} ]. {attributes_array[i]}"
-        string = " ".join([string, temp_string])
+def interpolate_attributes_to_string(attributes_dict: dict) -> str:  
+    interpolated_string = []
     
-    return string
+    for key, value in attributes_dict.items():
+        attribute_name = normalize_attribute_string(value)
+        interpolated_string.append(f"[ {key} ] {attribute_name}")
+
+    return " | ".join(interpolated_string)
